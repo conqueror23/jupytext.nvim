@@ -14,7 +14,11 @@ local language_names = {
 
 M.get_ipynb_metadata = function(filename)
   local metadata = vim.json.decode(io.open(filename, "r"):read "a")["metadata"]
-  local kernelspec = (metadata and metadata.kernelspec) or {}
+  local kernelspec = (metadata and metadata.kernelspec)
+    or {
+      name = "python3",
+      language = "python3",
+    }
   local language = kernelspec.language
   if language == nil then
     language = language_names[kernelspec.name]
