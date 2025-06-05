@@ -25,7 +25,7 @@ M.get_ipynb_metadata = function(filename)
   local kernelspec = (metadata and metadata.kernelspec)
     or {
       name = "python3",
-      language = "python3",
+      language = "python",
     }
   local language = kernelspec.language
   if language == nil then
