@@ -68,7 +68,7 @@ end
 
 local read_from_ipynb = function(ipynb_filename)
   local metadata = utils.get_ipynb_metadata(ipynb_filename)
-  local ipynb_filename = vim.fn.resolve(vim.fn.expand(ipynb_filename))
+  -- local ipynb_filename = vim.fn.resolve(vim.fn.expand(ipynb_filename))
 
   -- Decide output extension and style
   local custom_formatting, output_extension, to_extension_and_style = style_and_extension(metadata)
@@ -181,6 +181,11 @@ M.setup = function(config)
   -- and other important plugins get going
   if pcall(require, "lazy") then
     vim.api.nvim_exec_autocmds("User", { pattern = "LazyFile", modeline = false })
+  end
+
+  if not output_file or output_file == "v:null" then
+    vim.notify("Jupytext conversion failed: missing metadata or broken notebook", vim.log.levels.ERROR)
+    return
   end
 end
 
