@@ -31,7 +31,7 @@ end
 M.get_jupytext_file = function(filename, extension)
   local jupytext = metadata and metadata.jupytext
   if not jupytext or type(jupytext.formats) ~= "string" then
-    return "md"
+    return ".md"
   end
 
   local fileroot = vim.fn.fnamemodify(filename, ":r")
